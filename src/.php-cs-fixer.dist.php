@@ -9,13 +9,12 @@ return $config
     ->setRules([
         // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/ruleSets/PSR12.rst
         '@PSR12' => true,
-        'new_with_braces' => false,
-        'self_static_accessor' => true,
         // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/ruleSets/PHP82Migration.rst
         '@PHP82Migration' => true,
         // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/ruleSets/PhpCsFixer.rst
         '@PhpCsFixer' => true,
-        // 'self_static_accessor' => true,
+        'self_static_accessor' => true,
+        'new_with_braces' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
