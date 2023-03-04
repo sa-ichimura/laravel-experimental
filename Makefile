@@ -1,4 +1,5 @@
-# docker
+# api command
+
 .PHONY:api.up
 api.up:
 	docker compose up -d
@@ -7,23 +8,20 @@ api.up:
 api.bash:
 	docker compose exec app bash
 
-.PHONY:tools.up
-tools.up:
-	docker compose --profile tools up -d
-PHONY:up
-	api.up api.tools
+.PHONY:api.build
+api.build:
+	docker compose build --no-cache
 
-.PHONY:build
-build:
-	docker compose build --no-cache &&\
-	docker compose --profile tools build --no-cache
-.PHONY:stop
-stop:
-	docker compose --profile tools stop &&\
-	docker compose --profile docs stop &&\
+.PHONY:api.fmt
+api.fmt:
+	docker compose exec app ./vendor/bin/php-cs-fixer fix
+
+.PHONY:api.stop
+api.stop:
 	docker compose stop
-.PHONY:init
-init:
+
+.PHONY:api.init
+api.init:
 	docker compose exec app bash -c "chmod -R 777 storage bootstrap/cache" && \
 	docker compose exec app bash -c "composer install" && \
 	docker compose exec app bash -c "cp .env.example .env" && \
@@ -35,4 +33,3 @@ init:
 openapi-generator: 
 	 docker compose --profile docs up openapi-generator
 
-# api
