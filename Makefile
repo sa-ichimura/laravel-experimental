@@ -16,6 +16,10 @@ api.build:
 api.fmt:
 	docker compose exec app ./vendor/bin/php-cs-fixer fix
 
+.PHONY:api.lint
+api.lint:
+	docker compose exec app ./vendor/bin/phpstan analyse app
+
 .PHONY:api.stop
 api.stop:
 	docker compose stop
@@ -28,6 +32,15 @@ api.init:
 	docker compose exec app bash -c "php artisan key:generate" && \
 	docker compose exec app bash -c "php artisan storage:link" && \
 	docker compose exec app bash -c "php artisan migrate"
+
+#database
+.PHONY:db.login
+db.login:
+	docker-compose exec db  mysql -uroot -psecret laravel
+
+.PHONY:db.rest
+db.reset:
+	docker compose exec app php artisan migrate:fresh --seed
 
 # document
 openapi-generator: 
