@@ -10,12 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->comment('コメント');
-            $table->id();
-            $table->string('text')->comment('コメント本文');
-            $table->unsignedBigInteger('user_id')->comment('userID');
-            $table->datetimes();
+        Schema::create('skill_user', function (Blueprint $table) {
+            $table->comment('資格とユーザーの中間テーブル');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('skill_id');
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('skill_users');
     }
 };

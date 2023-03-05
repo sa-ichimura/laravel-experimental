@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
     {
         User::factory(3)
             ->hasComments(3)
+            ->hasSkills(3)
             ->hasPhone(3)
             ->create()
         ;

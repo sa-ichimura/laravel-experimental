@@ -11,6 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('phones', function (Blueprint $table) {
+            $table->comment('ケータイ');
             $table->id();
             $table->unsignedBigInteger('user_id')->comment('userのID');
             $table->string('name', 50)->comment('ケータイ機種名');
