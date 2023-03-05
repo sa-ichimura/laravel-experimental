@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property Phone $phone
+ * @property Phone               $phone
+ * @property Collection<Comment> $comments
  */
 class User extends Authenticatable
 {
@@ -54,5 +56,13 @@ class User extends Authenticatable
     public function phone(): HasOne
     {
         return $this->hasOne(Phone::class);
+    }
+
+    /**
+     * @return HasMany<Comment>
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
