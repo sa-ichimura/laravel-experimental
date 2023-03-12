@@ -41,8 +41,3 @@ db.login:
 .PHONY:db.rest
 db.reset:
 	docker compose exec app php artisan migrate:fresh --seed
-
-# document
-openapi-generator: 
-	 docker compose --profile docs up openapi-generator
-
